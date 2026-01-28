@@ -1,3 +1,4 @@
+import { email } from "zod";
 import { Roletype } from "../generated/prisma/enums";
 import { prisma } from "../lib/prisma";
 import { SignUpValues } from "../utils/schema/user";
@@ -26,6 +27,14 @@ export const createUser = async (data: SignUpValues, photo: string) => {
       name: data.name,
       role_id: role.id,
       photo,
+    },
+  });
+};
+
+export const finduserByEmail = async (email: string) => {
+  return prisma.user.findFirstOrThrow({
+    where: {
+      email: email,
     },
   });
 };

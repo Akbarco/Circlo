@@ -1,6 +1,6 @@
 import express from "express";
 import multer from "multer";
-import { storageUserPhoto } from "../utils/schema/multer";
+import { storageUserPhoto } from "../utils/multer";
 import * as userController from "../controllers/userController";
 
 const userRoute = express.Router();
@@ -21,5 +21,7 @@ userRoute.post(
   uploadPhoto.single("photo"),
   userController.signUp,
 );
+
+userRoute.post("/auth/sign-in", userController.signIN);
 
 export default userRoute;

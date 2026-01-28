@@ -6,11 +6,10 @@ export default function errorHandler(
   error: Error,
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   console.error(error);
 
-  // AppError (expected error)
   if (error instanceof AppError) {
     return res.status(error.statusCode).json({
       success: false,
@@ -19,7 +18,6 @@ export default function errorHandler(
     });
   }
 
-  // Prisma known error
   if (error instanceof Prisma.PrismaClientKnownRequestError) {
     return res.status(400).json({
       success: false,
@@ -28,9 +26,8 @@ export default function errorHandler(
     });
   }
 
-  // Unknown error
   return res.status(500).json({
     success: false,
-    message: "Internal server error",
+    message: "Internal server errorss",
   });
 }
